@@ -15,7 +15,6 @@ from .serializers import InvoiceSerializer
 
 load_dotenv()
 
-# Supported image MIME types for direct image input
 IMAGE_EXTENSIONS = {
     '.jpg': 'image/jpeg',
     '.jpeg': 'image/jpeg',
@@ -72,7 +71,6 @@ class InvoiceCreateAPIView(generics.CreateAPIView):
         content_blocks = []
 
         if 'pdf' in content_type:
-            # Write PDF bytes to a temporary buffer and convert to images
             import tempfile
             with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
                 tmp.write(image_bytes)
@@ -96,8 +94,7 @@ class InvoiceCreateAPIView(generics.CreateAPIView):
             finally:
                 os.unlink(tmp_path)
         else:
-            # Determine the media type from content-type header
-            media_type = "image/jpeg"  # default fallback
+            media_type = "image/jpeg"
             if 'png' in content_type:
                 media_type = "image/png"
             elif 'webp' in content_type:
@@ -163,7 +160,6 @@ class InvoiceCreateAPIView(generics.CreateAPIView):
             ]
         )
 
-        # Guard against truncated output that would produce invalid JSON
         if response.stop_reason == "max_tokens":
             raise ValueError(
                 "AI response was truncated due to token limit. "
