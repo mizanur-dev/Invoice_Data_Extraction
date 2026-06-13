@@ -97,7 +97,7 @@ Restaurant_Manager/
 ├── requirements.txt          # Python dependencies
 ├── .env                      # Environment variables (create this)
 ├── db.sqlite3               # SQLite database
-├── new_endpoint/            # Django project settings
+├── core/                    # Django project settings
 │   ├── __init__.py
 │   ├── settings.py          # Django settings
 │   ├── urls.py              # Main URL routing
@@ -269,7 +269,7 @@ The `Invoice` model stores invoice records and extracted data.
 
 ### Django Settings
 
-Key settings in `new_endpoint/settings.py`:
+Key settings in `core/settings.py`:
 
 ```python
 # Debug Mode (set to False in production)
